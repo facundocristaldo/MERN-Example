@@ -14,10 +14,10 @@ const Navbar = () => {
   const authLinks = (
     <ul>
       <li>
-        <a onClick={handleLogout}>
+        <button onClick={handleLogout}>
           <i className="fas fa-sign-out-alt"></i>{" "}
           <span className="hide-sma">Logout</span>
-        </a>
+        </button>
       </li>
     </ul>
   );
