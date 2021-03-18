@@ -14,10 +14,19 @@ const Navbar = () => {
   const authLinks = (
     <ul>
       <li>
-        <button onClick={handleLogout}>
+        <Link to="/profiles">Developers</Link>
+      </li>
+      <li>
+        <Link to="/dashboard">
+          <i className="fas fa-user" />{" "}
+          <span className="hide-sm">Dashboard</span>
+        </Link>
+      </li>
+      <li>
+        <a href="/#!" onClick={handleLogout}>
           <i className="fas fa-sign-out-alt"></i>{" "}
-          <span className="hide-sma">Logout</span>
-        </button>
+          <span className="hide-sm">Logout</span>
+        </a>
       </li>
     </ul>
   );
@@ -25,7 +34,7 @@ const Navbar = () => {
   const guestLinks = (
     <ul>
       <li>
-        <Link to="/#!">Developers</Link>
+        <Link to="/profiles">Developers</Link>
       </li>
       <li>
         <Link to="/register">Register</Link>
