@@ -6,7 +6,8 @@ import {
   LOGOUT,
   REGISTER_FAIL,
   REGISTER_SUCCESS,
-  USER_LOADED
+  USER_LOADED,
+  CLEAR_PROFILE
 } from "./actionTypes";
 import { setAlert } from "./alertAction";
 
@@ -84,4 +85,5 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
+  dispatch({ type: CLEAR_PROFILE });
 };
