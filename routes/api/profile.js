@@ -7,6 +7,7 @@ const config = require("config");
 
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
+const Posts = require("../../models/Posts");
 
 // @route   GET api/profile/me
 // @desc    Get current users profile
@@ -41,7 +42,7 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ msg: errors.array });
+      return res.status(400).json({ errors: errors.array() });
     }
     const {
       company,
@@ -62,7 +63,10 @@ router.post(
     profileFields.user = req.user.id;
 
     if (company) profileFields.company = company;
-    if (website) profileFields.website = website;
+    if (website)
+      profileFields.website = website.startsWith("http")
+        ? website
+        : `https://${website}`;
     if (location) profileFields.location = location;
     if (bio) profileFields.bio = bio;
     if (status) profileFields.status = status;
@@ -72,11 +76,26 @@ router.post(
     }
     //build social object
     profileFields.social = {};
-    if (youtube) profileFields.social.youtube = youtube;
-    if (twitter) profileFields.social.twitter = twitter;
-    if (facebook) profileFields.social.facebook = facebook;
-    if (instagram) profileFields.social.instagram = instagram;
-    if (linkedin) profileFields.social.linkedin = linkedin;
+    if (youtube)
+      profileFields.social.youtube = youtube.startsWith("http")
+        ? youtube
+        : `https://${youtube}`;
+    if (twitter)
+      profileFields.social.twitter = twitter.startsWith("http")
+        ? twitter
+        : `https://${twitter}`;
+    if (facebook)
+      profileFields.social.facebook = facebook.startsWith("http")
+        ? facebook
+        : `https://${facebook}`;
+    if (instagram)
+      profileFields.social.instagram = instagram.startsWith("http")
+        ? instagram
+        : `https://${instagram}`;
+    if (linkedin)
+      profileFields.social.linkedin = linkedin.startsWith("http")
+        ? linkedin
+        : `https://${linkedin}`;
 
     try {
       let profile = await Profile.findOne({ user: req.user.id });
@@ -139,7 +158,9 @@ router.get("/user/:user_id", async (req, res) => {
 // @access  Private
 router.delete("/", auth, async (req, res) => {
   try {
-    //TODO remove user posts
+    //Remove user posts
+    await Posts.deleteMany({ user: req.user.id });
+
     //Remove profile
     await Profile.findOneAndRemove({ user: req.user.id });
 

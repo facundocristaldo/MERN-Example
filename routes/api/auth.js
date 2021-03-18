@@ -14,12 +14,11 @@ const config = require("config");
 router.get("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
-    res.json(user);
+    return res.json(user);
   } catch (error) {
     console.error(error.message);
-    res.status(500).json("Server Error");
+    return res.status(500).json("Server Error");
   }
-  res.send("Auth route");
 });
 
 // @route   POST api/auth
