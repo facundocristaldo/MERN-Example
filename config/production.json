@@ -1,0 +1,6 @@
+{
+    "mongoURI":"mongodb+srv://mernuser:mernuser123@mern-udemy.dqdlx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtSecret":"mysecrettoken",
+    "githubClientId":"Iv1.80e24fac1e5c07f3",
+    "githubSecret":"bd139be415e05161921ac03112162571cc8d1db9"
+}
