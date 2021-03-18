@@ -23,7 +23,6 @@ const Register = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      console.log("Passwords do not match");
       dispatch(setAlert("Passwords do not match", "danger"));
     } else {
       dispatch(register({ name, email, password }));
