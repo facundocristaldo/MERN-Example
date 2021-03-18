@@ -2,9 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
-
 import Alert from "../layout/Alert";
-
 import Dashboard from "../dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import CreateProfile from "../profile-forms/CreateProfile";
@@ -33,7 +31,7 @@ const Routes = () => {
         <PrivateRoute exact path="/add-education" component={AddEducation} />
         <PrivateRoute exact path="/posts" component={Posts} />
         <PrivateRoute exact path="/posts/:postId" component={Post} />
-        <Route path="/" component={NotFound} />
+        <Route component={NotFound} />
       </Switch>
     </div>
   );
